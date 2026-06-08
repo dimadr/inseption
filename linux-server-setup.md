@@ -165,6 +165,28 @@ sudo ufw status verbose # проверить статус
 sudo ufw logging off # это выключение логов, делается на выключенном ufw
 sudo ufw enable # включить Firewall
 sudo ufw disable # выключить Firewall
+sudo ufw allow 2012:2021/tcp # Добавить правила
+sudo ufw allow 2012:2021/udp # Добавить правила
+sudo ufw delete allow 2012:2021/tcp # Удалить правила
+sudo ufw delete allow 2012:2021/udp # Удалить правила
+
+# Добавить правила
+# IPv4 (21 правило)
+sudo iptables -A INPUT -p tcp --dport 2012:2022 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 2012:2022 -j ACCEPT
+
+# IPv6 (21 правило)
+sudo ip6tables -A INPUT -p tcp --dport 2012:2022 -j ACCEPT
+sudo ip6tables -A INPUT -p udp --dport 2012:2022 -j ACCEPT
+
+# Удалить правила
+# IPv4
+sudo iptables -D INPUT -p tcp --dport 2012:2022 -j ACCEPT
+sudo iptables -D INPUT -p udp --dport 2012:2022 -j ACCEPT
+
+# IPv6
+sudo ip6tables -D INPUT -p tcp --dport 2012:2022 -j ACCEPT
+sudo ip6tables -D INPUT -p udp --dport 2012:2022 -j ACCEPT
 ```
 
 ### Для CentOS/RHEL с firewalld:
